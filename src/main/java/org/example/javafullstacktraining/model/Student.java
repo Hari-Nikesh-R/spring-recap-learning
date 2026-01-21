@@ -1,14 +1,9 @@
 package org.example.javafullstacktraining.model;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "students")
 public class Student {
     private String firstName;
     private String lastName;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rollNo;
     private String email;
     private String address;
