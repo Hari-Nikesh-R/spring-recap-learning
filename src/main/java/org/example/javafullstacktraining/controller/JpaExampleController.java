@@ -9,15 +9,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class JpaExampleController {
+
+    // Request -> RestControllerAdvice -> RestController -> Service -> Respository -> Service -> RestController -> RestControllerAdvice
 
     @Autowired
     private JpaExampleService jpaExampleService;
@@ -32,8 +32,9 @@ public class JpaExampleController {
     private JwtUtils jwtUtils;
 
     @GetMapping("/store/hello")
-    public String helloWorld() {
-        return "Hello World!";
+    public String helloWorld(@RequestParam("q") String id) {
+//        throw new NullPointerException();
+        return "Hello World!" + id;
     }
 
     /**

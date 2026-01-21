@@ -1,11 +1,13 @@
 package org.example.javafullstacktraining.service.impl;
 
+import org.example.javafullstacktraining.configuration.AuthenticationManagerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,11 +21,17 @@ import org.springframework.stereotype.Service;
  * - Validate user credentials
  * - Retrieve user authorities/roles
  */
+
+// 1 -> Controller
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+//    @Autowired
+//    private AuthenticationManagerConfig authenticationManagerConfig;
+
 
     /**
      * Loads user details by username.
@@ -52,6 +60,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         // NOTE: In production, retrieve the already-hashed password from database
         // Encoding here is just for demonstration - password should be encoded once during registration
         String password = passwordEncoder.encode("password");
+        String pass1 = passwordEncoder.encode("password");
 
         // Build and return UserDetails object with username, password, and roles
         return User.builder()
