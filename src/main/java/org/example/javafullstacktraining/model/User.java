@@ -3,8 +3,8 @@ package org.example.javafullstacktraining.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "user")
+public class User {
     private String firstName;
     private String lastName;
     @Id
@@ -13,9 +13,9 @@ public class Student {
     private String email;
     private String address;
 
-    public Student() {}
+    public User() {}
 
-    public Student(String firstName, String lastName, Long rollNo, String email, String address) {
+    public User(String firstName, String lastName, Long rollNo, String email, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.rollNo = rollNo;
