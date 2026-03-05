@@ -1,9 +1,13 @@
 package org.example;
 
 
-// Refer dsa_missing_numers.md in document for explanation
-public class Main {
-    public static void main(String[] args) {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
+public class Main {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
     }
 }
