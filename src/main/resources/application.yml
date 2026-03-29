@@ -1,0 +1,71 @@
+server:
+  port: 8080
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration
+  application:
+    name: api-gateway-learning
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cloud:
+    gateway:
+      httpclient:
+        pool:
+          type: elastic
+          max-connections: 200
+          max-idle-time: 45s
+          max-life-time: 5m
+        connect-timeout: 3000
+        response-timeout: 15s
+      routes:
+        - id: open-echo
+          uri: https://httpbin.org
+          predicates:
+            - Path=/open/**
+          filters:
+            - StripPrefix=1
+
+        - id: rate-limited-demo
+          uri: https://httpbin.org
+          predicates:
+            - Path=/demo/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: api-key-protected
+          uri: https://httpbin.org
+          predicates:
+            - Path=/secure/**
+          filters:
+            - StripPrefix=1
+            - name: ApiKey
+              args:
+                headerName: X-API-Key
+                validKey: ${GATEWAY_DEMO_API_KEY:demo-gateway-secret}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty: INFO
