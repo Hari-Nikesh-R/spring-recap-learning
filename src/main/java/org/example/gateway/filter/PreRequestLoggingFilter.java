@@ -22,6 +22,8 @@ public class PreRequestLoggingFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         var req = exchange.getRequest();
         log.info("Gateway pre: {} {}", req.getMethod(), req.getPath());
+        // you can write your own implementation like JWT token validation etc...
+
         return chain.filter(exchange);
     }
 
