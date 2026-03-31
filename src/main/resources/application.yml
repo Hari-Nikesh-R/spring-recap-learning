@@ -1,27 +1,2 @@
 server:
   port: 8096
-
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: users
-          uri: http://localhost:8090
-          predicates:
-            - Path=/users/**
-          filters:
-            - StripPrefix=1
-
-        - id: orders
-          uri: http://localhost:8081
-          predicates:
-            - Path=/order/**
-          filters:
-            - StripPrefix=1
-
-        - id: payment
-          uri: http://localhost:8082
-          predicates:
-            - Path=/payment/**
-          filters:
-            - StripPrefix=1
