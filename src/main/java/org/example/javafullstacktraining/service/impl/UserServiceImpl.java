@@ -4,14 +4,17 @@ import org.example.javafullstacktraining.model.User;
 import org.example.javafullstacktraining.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
-
+    @Override
+    public List<User> fetchAllUser() {
+        return List.of();
+    }
 
     @Override
-    public String saveStaticUserData(User user) {
-        // save this data in database
-        // No need of writing an insert query.
-        return "Successfully saved";
+    public User getSpecificUser(int id) {
+        return new User(id, "Hari", "Nikesh", 10L, "hari@gmail.com");
     }
 }

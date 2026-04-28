@@ -2,6 +2,11 @@ package org.example.javafullstacktraining.service;
 
 import org.example.javafullstacktraining.model.User;
 
+import java.util.List;
+
 public interface UserService {
-    String saveStaticUserData(User user);
+    List<User> fetchAllUser();
+
+    User getSpecificUser(int id);
+
 }
