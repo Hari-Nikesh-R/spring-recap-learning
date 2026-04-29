@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/batchdb
+    username: batchuser
+    password: batchpass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  batch:
+    jdbc:
+      # Options: always, never, embedded
+      initialize-schema: always
+
+    job:
+      enabled: true
